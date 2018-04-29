@@ -11,18 +11,18 @@ public class Tests {
 
     public static String testAll(String name, String message) {
         long init = System.currentTimeMillis() % 1000;
-        String capitalize = Capitalize.brazillianCapitalize(name);
+        String capitalize = Capitalize.capitalizeByWords(name);
         long end = System.currentTimeMillis() % 1000;
-        System.out.println(end - init + "ms. Total chars: " + name.length() + ". " + message);
-        return name;
+        System.out.println(end - init + "ms. Total chars: " + name.length() + ". " + message + " : " + capitalize);
+        return capitalize;
     }
 
     public static String testAllWithOld(String name, String message) {
         long init = System.currentTimeMillis() % 1000;
         String capitalize = OldCapitalize.capitalize(name);
         long end = System.currentTimeMillis() % 1000;
-        System.out.println(end - init + "ms. Total chars: " + name.length() + ". " + message);
-        return name;
+        System.out.println(end - init + "ms. Total chars: " + name.length() + ". " + message + " : " + capitalize);
+        return capitalize;
     }
 
     public static List<String> dumpNames() {
