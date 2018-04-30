@@ -21,6 +21,5 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.28" level="project" />
   </component>
 </module>

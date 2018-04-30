@@ -20,11 +20,6 @@
         </plugins>
     </build>
     <dependencies>
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-            <version>RELEASE</version>
-        </dependency>
     </dependencies>
 
 
