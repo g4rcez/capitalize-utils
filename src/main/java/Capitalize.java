@@ -28,11 +28,11 @@ public final class Capitalize {
     /**
      * All accented characters in the Portuguese alphabet, in UPPER CASE
      */
-    private static final String ALL_SPECIAL_UPPER_CASE = "A-ZÇÁÀÃÂÉÈẼÊÌÍĨÎÕÓÒÔŨÚÙÜÛ";
+    private static final String ALL_SPECIAL_UPPER_CASE = "A-ZÇÁÀÃÂÉÈẼÊÌÍĨÎÕÓÒÔŨÚÙÜÛ.";
     /**
      * All accented characters in the Portuguese alphabet, in lower case
      */
-    private static final String ALL_SPECIAL_LOWER_CASE = "a-zçáàãâéèẽêìíĩîõóòôũúùüû";
+    private static final String ALL_SPECIAL_LOWER_CASE = "a-zçáàãâéèẽêìíĩîõóòôũúùüû.";
 
     /**
      * Just regex for characters in ALL_SPECIAL...in cases where groups covering the
@@ -50,7 +50,8 @@ public final class Capitalize {
      * @return
      */
     private static Matcher getMatcher(String string) {
-        return Pattern.compile(REGEX_ALL_UPPER_CASE + "{2,}(?=" + REGEX_ALL_UPPER_CASE + REGEX_ALL_LOWER_CASE +
+        return Pattern.compile(REGEX_ALL_UPPER_CASE +
+                "{2,}(?=" + REGEX_ALL_UPPER_CASE + REGEX_ALL_LOWER_CASE +
                 "+[0-9]*|\\b)|" + REGEX_ALL_UPPER_CASE + "?" + REGEX_ALL_LOWER_CASE
                 + "+[0-9]*|" + REGEX_ALL_UPPER_CASE + "|[0-9]+").matcher(string);
     }
@@ -93,12 +94,18 @@ public final class Capitalize {
      * @param string
      * @return
      */
-    public static String toCamelCase(String string) {
+    public static String toPascalCase(String string) {
         StringBuilder stringBuilder = new StringBuilder();
         Matcher matcher = getMatcher(string);
         while (matcher.find())
             stringBuilder.append(matcher.group(0).substring(0, 1).toUpperCase()).append(matcher.group(0).substring(1).toLowerCase());
         return String.valueOf(stringBuilder).trim();
+    }
+
+    public static String toCamelCase(String string) {
+        String camelCase = toPascalCase(string);
+        return camelCase.substring(0, 1).toLowerCase()
+                .concat(camelCase.substring(1));
     }
 
     /**
@@ -127,20 +134,5 @@ public final class Capitalize {
         while (matcher.find())
             n.append(matcher.group(0).toLowerCase().concat("-"));
         return n.toString().replaceAll("-$", "");
-    }
-
-    /**
-     * Convert any CamelCase string to another case, with replace string
-     *
-     * @param string
-     * @param replace
-     * @return
-     */
-    public static String camelCaseToAnother(String string, String replace) {
-        return string.replaceAll("([" + ALL_SPECIAL_LOWER_CASE + "\\d])" +
-                "(" + REGEX_ALL_UPPER_CASE + ")", "$1" + replace + "$2").replaceAll
-                ("(" + REGEX_ALL_UPPER_CASE + "+)" +
-                        "(" + REGEX_ALL_UPPER_CASE + "[" +
-                        ALL_SPECIAL_LOWER_CASE + "\\d]+)", "$1" + replace + "$2");
     }
 }

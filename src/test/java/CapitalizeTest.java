@@ -1,37 +1,59 @@
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-@RunWith(Arquillian.class)
+import static org.junit.Assert.assertEquals;
+
 public class CapitalizeTest {
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addClass(Capitalize.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-    }
 
     @Test
     public void capitalizeByWords() {
+        assertEquals("Fulano Da Silva Sauro", Capitalize.capitalizeByWords("FULANO DA SILVA SAURO"));
     }
 
     @Test
     public void brazilianCapitalize() {
+        assertEquals("Fulano da Silva Sauro de Moura",
+                Capitalize.brazilianCapitalize("FULANO DA SILVA SAURO de moura"));
+    }
+
+    @Test
+    public void toPascalCase() {
+        assertEquals("FulanoDaSilvaSauroDeMoura",
+                Capitalize.toPascalCase("FULANO DA SILVA SAURO de moura"));
     }
 
     @Test
     public void toCamelCase() {
+        assertEquals("fulanoDaSilvaSauroDeMoura",
+                Capitalize.toCamelCase("FULANO DA SILVA SAURO de moura"));
     }
 
     @Test
     public void toSneakCase() {
+        assertEquals("fulano_da_silva_sauro_de_moura",
+                Capitalize.toSneakCase("FULANO DA SILVA SAURO de moura"));
     }
 
     @Test
     public void toSlugCase() {
+        assertEquals("fulano-da-silva-sauro-de-moura",
+                Capitalize.toSlugCase("FULANO DA SILVA SAURO de moura"));
+    }
+
+    @Test
+    public void testWithFilenameSneak(){
+        assertEquals("file_music.mp3",
+                Capitalize.toSneakCase("file music.mp3"));
+    }
+
+    @Test
+    public void testWithFilenameSlug(){
+        assertEquals("file-music.mp3",
+                Capitalize.toSlugCase("file music.mp3"));
+    }
+
+    @Test
+    public void testWithFilenameCamel(){
+        assertEquals("FileMusic.mp3",
+                Capitalize.toPascalCase("file music.mp3"));
     }
 }
