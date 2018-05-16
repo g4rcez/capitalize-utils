@@ -3,10 +3,23 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.capitalize</groupId>
     <artifactId>capitalize</artifactId>
-    <version>1.0.0-Deadpool</version>
+    <packaging>jar</packaging>
+    <version>1.0.0-RELEASE</version>
+
+    <name>Capitalize</name>
+    <description>A little Java class to capitalize strings like text-transform in CSS</description>
+    <url>https://github.com/vandalvnl/capitalize-utils</url>
+
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://github.com/vandalvnl/capitalize-utils/blob/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <build>
         <plugins>
             <plugin>
@@ -45,6 +58,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-
 </project>
